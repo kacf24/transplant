@@ -2,30 +2,9 @@ library(pvclust)
 library(readr)
 
 
-#MyPathCode
-os<-.Platform$OS.type
-path<-ifelse(os == "unix","~/Desktop/GitHub/","C:\\Users\\Bismuth\\Desktop\\GitHub\\")
-#paste0(path,"RestOfPath"
-.repath <- function(fullpath) {
-  h <- gsub("/","\\",fullpath, fixed = TRUE)
-}
-
-fullpath <-paste0(path,"Datasets/transplant/")
-if(os != "unix"){fullpath <- .repath(fullpath)}
-
-
-files <- list.files(fullpath,pattern = "*.csv")
-
-for(i in 1:length(files)){
-  filename=files[i]
-  data=read_csv(paste0(fullpath,filename))
-  assign(x = filename,value = data)
-  rm(data)
-}
 
 
 #Custom Graphics for pvclust
-#Custom Graphics
 hc2axes<- function (x) {
   A <- x$merge
   n <- nrow(A) + 1
