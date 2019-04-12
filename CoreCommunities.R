@@ -4,6 +4,8 @@ library(plyr)
 cutoff <- 1 
 #Read in your ASV table
 ASVTablet<-read.csv("ASVtablet.csv")
+metadata<-read.csv("metadata.csv")
+taxonomy<-read.csv("taxonomy.csv")
 
 
 ASVTable <- data.frame(t(ASVTablet[-1]))
@@ -17,8 +19,8 @@ Sample_1 <- subset(TableandMetadata,TableandMetadata$treatment=="watered"&Tablea
 #Switch the commenting if you're trying to compare more than one thing, and uncomment the sections at end of code
 Sample_2 <- Sample_1
 #Sample_2 <- subset(TableandMetadata,TableandMetadata$treatment=="control"&TableandMetadata$day =="4"&TableandMetadata$tissue=="vegetative")
-pA_Sample_1 <- ifelse(Sample_1[,1:ncol(Sample_1)] > 0,1,0)
-pA_Sample_2 <- ifelse(Sample_2[,1:ncol(Sample_2)] > 0,1,0)
+pA_Sample_1 <- ifelse(Sample_1[,1:(ncol(Sample_1)-ncol(metadata))] > 0,1,0)
+pA_Sample_2 <- ifelse(Sample_2[,1:(ncol(Sample_2)-ncol(metadata))] > 0,1,0)
 colMeans_Sample_1 <-colMeans(pA_Sample_1)
 colMeans_Sample_2 <-colMeans(pA_Sample_2)
 
