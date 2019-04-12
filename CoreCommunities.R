@@ -78,7 +78,11 @@ for(j in length(results):1){
 df_r_both <- data.frame(ASVid =results_both)
 df_r_both$ASVid <- row.names(df_r_both)
 output_both <- join(df_r_both,taxonomy,by="ASVid",type="inner")
-
+for (i in 1:nrow(output_both)){
+  z <- toString(output_both$ASVid[i])
+  x <- Sample_1[z]
+  output_both$meanASV[i] <- colMeans(x)
+}
 
 write.csv(output_both, file = "controlReproductive.csv")
 
